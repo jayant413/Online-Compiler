@@ -8,12 +8,14 @@ const getLanguages = async (req, res) => {
         const data = await fetchApiData(query);
         res.status(200).json({
             success: true,
+            message: "Languages fetched successfully",
             data: data
         })
     } catch (error) {
-        res.status(404).json({
+        res.status(400).json({
             success: false,
-            message: "Error while fetcing languages"
+            message: "Error while fetcing languages",
+            error: error
         })
     }
 }
@@ -26,13 +28,16 @@ const getLanguage = async (req, res) => {
         res.status(200).json({
             success: true,
             language_id: language_id,
+            message: `language with ${language_id} fetched successfully`,
             data: data
         })
     } catch (error) {
-        res.status(404).json({
+        res.status(400).json({
             success: false,
-            message: "Error while fetcing language "
+            message: "Error while fetcing language ",
+            error: error
         })
+
     }
 }
 
