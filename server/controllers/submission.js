@@ -10,7 +10,7 @@ const createSubmission = async (req, res) => {
         res.status(200).json({
             success: true,
             message: "Created submission successfully",
-            data: response
+            token: response.token
         })
     } catch (error) {
         res.status(400).json({
@@ -24,11 +24,11 @@ const createSubmission = async (req, res) => {
 const getSubmission = async (req, res) => {
     try {
         const token = req.params.token
-        const data = await getApiSubmission(token);
+        const response = await getApiSubmission(token);
         res.status(200).json({
             success: true,
             message: "Fetched submission successfully",
-            data: data
+            result: response
         })
     } catch (error) {
         res.status(400).json({

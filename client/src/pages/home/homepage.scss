@@ -1,0 +1,57 @@
+.home {
+  display: grid;
+  grid-template-columns: 10vw 44.95vw 0.1vw 44.95vw;
+  .sidebar {
+    background-color: gray;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 3rem;
+  }
+  .code-area {
+    height: 100%;
+    width: 100%;
+    background: rgb(18, 32, 67);
+    .code-area-bar {
+      background: rgb(46, 66, 100);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      .code-run-btn {
+        background: rgb(28, 28, 254);
+        color: rgb(171, 171, 171);
+        border-radius: 20%;
+        padding: 0.3rem 0.8rem;
+        &:hover {
+          color: white;
+          background: blue;
+        }
+      }
+    }
+    textarea {
+      resize: none;
+      background-color: transparent;
+      color: white;
+      height: 95%;
+      width: 95%;
+      outline: none;
+      border: none;
+      padding: 2rem;
+    }
+  }
+  .output-area {
+    height: 100%;
+    width: 100%;
+    background: rgb(18, 32, 67);
+    textarea {
+      resize: none;
+      background-color: transparent;
+      color: white;
+      height: 90%;
+      width: 90%;
+      outline: none;
+      border: none;
+      padding: 2rem;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let BASE_URL = "https://judge0-ce.p.rapidapi.com"
+let BASE_URL = `https://judge0-ce.p.rapidapi.com`
 
 const fetchApiData = async (query) => {
 
@@ -9,7 +9,8 @@ const fetchApiData = async (query) => {
         url: `${BASE_URL}/${query}`,
         headers: {
             'X-RapidAPI-Key': process.env.JUDGE0_API_KEY,
-            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+            // 'X-RapidAPI-Host': `${process.env.JUDGE0_HOST}`,
+            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
         }
     }
 
@@ -23,8 +24,8 @@ const fetchApiData = async (query) => {
 };
 
 const createApiSubmission = async (data) => {
-
     const options = {
+
         method: 'POST',
         url: `${BASE_URL}/submissions`,
         params: {
@@ -35,7 +36,8 @@ const createApiSubmission = async (data) => {
             'content-type': 'application/json',
             'Content-Type': 'application/json',
             'X-RapidAPI-Key': process.env.JUDGE0_API_KEY,
-            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+            // 'X-RapidAPI-Host': `${process.env.JUDGE0_HOST}`,
+            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
         },
         data: {
             language_id: data.language_id,
@@ -62,7 +64,8 @@ const getApiSubmission = async (token) => {
         },
         headers: {
             'X-RapidAPI-Key': process.env.JUDGE0_API_KEY,
-            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+            // 'X-RapidAPI-Host': `${process.env.JUDGE0_HOST}`,
+            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
         }
     };
 
