@@ -1,29 +1,40 @@
 .home {
   display: grid;
-  grid-template-columns: 10vw 44.95vw 0.1vw 44.95vw;
-  .sidebar {
-    background-color: gray;
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    padding-top: 3rem;
-  }
+  grid-template-columns: 10vw 45vw 45vw;
+  color: #ffffff;
+  // overflow: scroll;
   .code-area {
     height: 100%;
     width: 100%;
-    background: rgb(18, 32, 67);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: #1c2130;
     .code-area-bar {
-      background: rgb(46, 66, 100);
-      padding: 1rem 2rem;
+      background-color: #2f3033;
       display: flex;
-      justify-content: flex-end;
+      height: 8vh;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      justify-content: space-between;
+      align-items: center;
+      .code-filename {
+        background-color: #1c2130;
+        width: 8rem;
+        height: 7.5vh;
+        display: grid;
+        place-content: center;
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+      }
       .code-run-btn {
-        background: rgb(28, 28, 254);
-        color: rgb(171, 171, 171);
-        border-radius: 20%;
-        padding: 0.3rem 0.8rem;
+        cursor: pointer;
+        padding: 6px 16px;
+        margin: 0.7rem 2rem;
+        background: #0556f3;
+        font-size: 14px;
+        line-height: 20px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        font-weight: bold;
         &:hover {
-          color: white;
           background: blue;
         }
       }
@@ -31,7 +42,6 @@
     textarea {
       resize: none;
       background-color: transparent;
-      color: white;
       height: 95%;
       width: 95%;
       outline: none;
@@ -42,11 +52,33 @@
   .output-area {
     height: 100%;
     width: 100%;
-    background: rgb(18, 32, 67);
+    background-color: #1c2130;
+    .output-area-bar {
+      background-color: #2f3033;
+      padding: 0.7rem 2rem;
+      height: 8vh;
+      align-items: center;
+      display: flex;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      justify-content: space-between;
+      .output-area-title {
+        cursor: default;
+      }
+      .output-clear-btn {
+        cursor: pointer;
+        padding: 6px 16px;
+        background: transparent;
+        font-size: 14px;
+        line-height: 20px;
+        border: 1px solid white;
+        outline: none;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+    }
     textarea {
       resize: none;
       background-color: transparent;
-      color: white;
       height: 90%;
       width: 90%;
       outline: none;

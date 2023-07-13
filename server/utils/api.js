@@ -30,7 +30,7 @@ const createApiSubmission = async (data) => {
         url: `${BASE_URL}/submissions`,
         params: {
             base64_encoded: true,
-            fields: '*'
+            // fields: '*'
         },
         headers: {
             'content-type': 'application/json',
@@ -50,6 +50,9 @@ const createApiSubmission = async (data) => {
         return response.data
     } catch (error) {
         console.error("Error while creating Submission");
+        return {
+            message: "Error while creating Submission through api"
+        }
     }
 }
 

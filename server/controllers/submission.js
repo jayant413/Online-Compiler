@@ -7,6 +7,12 @@ const createSubmission = async (req, res) => {
         let data = req.body
 
         const response = await createApiSubmission(data);
+        if (!response.token) {
+            return res.status(404).json({
+                success: false,
+                message: "Not able to create submission",
+            })
+        }
         res.status(200).json({
             success: true,
             message: "Created submission successfully",

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SideBar from "../../components/sidebar/SideBar";
+import { languages } from "../../constants/languages";
 import axios from "axios";
 import "./homepage.scss";
 
@@ -9,32 +10,35 @@ const HomePage = () => {
 
   const compileCode = async () => {
     const encode = window.btoa(codeSnippet);
-    // const submissionResponse = await axios.post(
-    //   "http://localhost:8080/api/v1/submissions",
-    //   {
-    //     language_id: 92,
-    //     source_code: encode,
-    //   }
-    // );
 
-    // let token = submissionResponse.data.token;
+    /*  const submissionResponse = await axios.post(
+      "http://localhost:8080/api/v1/submissions",
+      {
+        language_id: 92,
+        source_code: encode,
+      }
+    );
 
-    // const outputResponse = await axios.get(
-    //   `http://localhost:8080/api/v1/submissions/${token}`
-    // );
-    const decode = window.atob(encode);
-    // setOutput(`> ${outputResponse.data.result.stdout}`);
-    setOutput(`> ${encode} , ${decode}`);
-    // console.log(outputResponse.data);
+    let token = submissionResponse.data.token;
+
+
+    const outputResponse = await axios.get(
+      `http://localhost:8080/api/v1/submissions/${token}`
+    );
+
+    let answer = outputResponse.data.result.stdout;
+    console.log(outputResponse.data);
+    const decode = window.atob(answer);
+
+    setOutput(`>  ${decode}`);   */
   };
 
   return (
     <div className="home">
-      <div className="sidebar">
-        <SideBar />
-      </div>
+      <SideBar languages={languages} />
       <div className="code-area">
         <div className="code-area-bar">
+          <span className="code-filename">main.py</span>
           <button className="code-run-btn" onClick={compileCode}>
             Run
           </button>
@@ -53,8 +57,13 @@ const HomePage = () => {
           ></textarea>
         </div>
       </div>
-      <div className="partision"></div>
       <div className="output-area">
+        <div className="output-area-bar">
+          <span className="output-area-title">Shell</span>
+          <button className="output-clear-btn" onClick={() => setOutput(">")}>
+            Clear
+          </button>
+        </div>
         <textarea
           name="code-output"
           id=""
