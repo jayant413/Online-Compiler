@@ -3,7 +3,6 @@ import express from 'express';
 import connectDB from './config/db.js';
 import colors from 'colors';
 import cors from 'cors';
-import { fetchApiData } from './utils/api.js';
 import apiRoutes from './routes/index.js'
 
 const PORT = 8080

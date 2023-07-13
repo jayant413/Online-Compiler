@@ -1,14 +1,13 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar/Navbar";
+import HomePage from "./pages/home/HomePage";
 
 function App() {
   return (
-    <>
-      <div className="font-bold">
-        <Navbar />
-        <span className="text-blue-800 ">Online Compiler</span>
-      </div>
-    </>
+    <div className="font-bold">
+      <Navbar />
+      <HomePage />
+    </div>
   );
 }
 
