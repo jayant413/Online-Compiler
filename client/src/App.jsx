@@ -4,12 +4,10 @@ import HomePage from "./pages/home/HomePage";
 
 function App() {
   return (
-    <>
-      <div className="font-bold">
-        <Navbar />
-        <HomePage />
-      </div>
-    </>
+    <div className="font-bold">
+      <Navbar />
+      <HomePage />
+    </div>
   );
 }
 

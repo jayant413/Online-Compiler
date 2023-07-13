@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../../components/sidebar/SideBar";
-import { languages } from "../../constants/languages";
 import axios from "axios";
 import "./homepage.scss";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
-  const [codeSnippet, setCodeSnippet] = useState("print(5)");
+  const selected_language = useSelector((state) => state.language);
+  const [codeSnippet, setCodeSnippet] = useState(
+    atob(selected_language.snippet)
+  );
   const [output, setOutput] = useState(">");
+
+  useEffect(() => {
+    setCodeSnippet(atob(selected_language.snippet));
+  }, [selected_language.snippet]);
 
   const compileCode = async () => {
     const encode = window.btoa(codeSnippet);
 
-    /*  const submissionResponse = await axios.post(
+    const submissionResponse = await axios.post(
       "http://localhost:8080/api/v1/submissions",
       {
         language_id: 92,
@@ -21,24 +28,24 @@ const HomePage = () => {
 
     let token = submissionResponse.data.token;
 
-
     const outputResponse = await axios.get(
       `http://localhost:8080/api/v1/submissions/${token}`
     );
 
     let answer = outputResponse.data.result.stdout;
-    console.log(outputResponse.data);
     const decode = window.atob(answer);
 
-    setOutput(`>  ${decode}`);   */
+    setOutput(`>  ${decode}`);
   };
 
   return (
     <div className="home">
-      <SideBar languages={languages} />
+      <SideBar />
       <div className="code-area">
         <div className="code-area-bar">
-          <span className="code-filename">main.py</span>
+          <span className="code-filename">
+            main.{selected_language.extension}
+          </span>
           <button className="code-run-btn" onClick={compileCode}>
             Run
           </button>
