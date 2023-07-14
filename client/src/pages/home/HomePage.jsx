@@ -3,6 +3,7 @@ import SideBar from "../../components/sidebar/SideBar";
 import axios from "axios";
 import "./homepage.scss";
 import { useSelector } from "react-redux";
+import Editor from "../../components/Editor/Editor";
 
 const HomePage = () => {
   const selected_language = useSelector((state) => state.language);
@@ -21,7 +22,7 @@ const HomePage = () => {
     const submissionResponse = await axios.post(
       "http://localhost:8080/api/v1/submissions",
       {
-        language_id: 92,
+        language_id: selected_language.id,
         source_code: encode,
       }
     );
@@ -31,10 +32,14 @@ const HomePage = () => {
     const outputResponse = await axios.get(
       `http://localhost:8080/api/v1/submissions/${token}`
     );
+    // console.log(outputResponse);
+    let answer;
+    !outputResponse.data.result.stdout === "ée"
+      ? (answer = outputResponse.data.result.stdout)
+      : (answer = outputResponse.data.result.stderr);
 
-    let answer = outputResponse.data.result.stdout;
     const decode = window.atob(answer);
-
+    // console.log(decode);
     setOutput(`>  ${decode}`);
   };
 
@@ -51,9 +56,9 @@ const HomePage = () => {
           </button>
         </div>
         <div className="code-snippet">
-          <textarea
+          {/* <textarea
             name="code-snippet"
-            id=""
+            id="realtimeEditor"
             cols="30"
             rows="10"
             className=""
@@ -61,7 +66,8 @@ const HomePage = () => {
             onChange={(e) => {
               setCodeSnippet(e.target.value);
             }}
-          ></textarea>
+          ></textarea> */}
+          <Editor codeSnippet={codeSnippet} setCodeSnippet={setCodeSnippet} />
         </div>
       </div>
       <div className="output-area">
