@@ -40,7 +40,7 @@ const SideBar = () => {
                       name: l.name,
                       id: l.id,
                       snippet: l.snippet,
-                      extension: l.extension,
+                      file_extension: l.file_extension,
                     })
                   );
                 }}
