@@ -17,8 +17,14 @@ connectDB();
 const app = express();
 
 // middlewares
-app.use(cors());
 app.use(express.json());
+app.use(cors({
+    origin: true,
+    optionsSuccessStatus: 200,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: false
+}))
+
 
 
 // routes

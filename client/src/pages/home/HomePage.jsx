@@ -4,6 +4,7 @@ import axios from "axios";
 import "./homepage.scss";
 import { useSelector } from "react-redux";
 import Editor from "../../components/Editor/Editor";
+import { createApiSubmission, getApiSubmission } from "../../utils/api";
 
 const HomePage = () => {
   const selected_language = useSelector((state) => state.language);
@@ -17,8 +18,11 @@ const HomePage = () => {
   }, [selected_language.snippet]);
 
   const compileCode = async () => {
-    const encode = window.btoa(codeSnippet);
+    /***
+     * API on Server
+     */
 
+    const encode = window.btoa(codeSnippet);
     const submissionResponse = await axios.post(
       "http://localhost:8080/api/v1/submissions",
       {
@@ -26,21 +30,44 @@ const HomePage = () => {
         source_code: encode,
       }
     );
-
     let token = submissionResponse.data.token;
-
     const outputResponse = await axios.get(
       `http://localhost:8080/api/v1/submissions/${token}`
     );
     // console.log(outputResponse);
     let answer;
-    !outputResponse.data.result.stdout === "ée"
+    !outputResponse.data.result.stdout === null
       ? (answer = outputResponse.data.result.stdout)
       : (answer = outputResponse.data.result.stderr);
-
     const decode = window.atob(answer);
     // console.log(decode);
     setOutput(`>  ${decode}`);
+
+    /***
+     *  API within client
+     */
+
+    // const source_code = window.btoa(codeSnippet);
+    // const data = {
+    //   language_id: selected_language.id,
+    //   source_code: source_code,
+    // };
+
+    // const submissionResponse = createApiSubmission(data);
+    // console.log(submissionResponse);
+
+    // let token = submissionResponse.data.token;
+
+    // const outputResponse = getApiSubmission(token);
+    // console.log(outputResponse);
+    // let answer;
+    // !outputResponse.data.result.stdout === null
+    //   ? (answer = outputResponse.data.result.stdout)
+    //   : (answer = outputResponse.data.result.stderr);
+
+    // const decode = window.atob(answer);
+    // console.log(decode);
+    // setOutput(`>  ${decode}`);
   };
 
   return (
