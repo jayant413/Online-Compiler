@@ -1,3 +1,5 @@
+$breakpoint: 768px;
+
 .ͼ1 {
   .cm-scroller {
     height: 100% !important;
@@ -16,4 +18,15 @@
 
 .codeMirror_editor {
   background: #1c2130;
+}
+
+@media (max-width: $breakpoint) {
+  // Your styles for the specified breakpoint
+  .ͼ1 {
+    .cm-scroller {
+      height: 100% !important;
+      font-size: medium;
+      background: #1c2130;
+    }
+  }
 }
