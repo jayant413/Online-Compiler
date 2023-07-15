@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "../../components/sidebar/SideBar";
+import Navbar from "../../components/navbar/Navbar";
 import axios from "axios";
 import "./homepage.scss";
 import { useSelector } from "react-redux";
@@ -49,122 +50,128 @@ const HomePage = () => {
   };
 */
   return (
-    <div className="home">
-      <SideBar setOutput={setOutput} setSelectedPannel={setSelectedPannel} />
+    <>
+      <Navbar />
 
-      <div
-        className={`code-area ${selectedPannel === "main" ? "show" : "hide"}`}
-      >
-        <div className="mobile_area_bar flex md:hidden">
-          <div className="mobile_area_bar_left">
+      <div className="home">
+        <SideBar setOutput={setOutput} setSelectedPannel={setSelectedPannel} />
+
+        <div
+          className={`code-area ${selectedPannel === "main" ? "show" : "hide"}`}
+        >
+          <div className="mobile_area_bar flex md:hidden">
+            <div className="mobile_area_bar_left">
+              <button
+                className={`mobile_area_bar_btn ${
+                  selectedPannel === "main" ? "selected_pannel_btn " : ""
+                }`}
+                onClick={() => {
+                  setSelectedPannel("main");
+                }}
+              >
+                main.py
+              </button>
+              <button
+                className={`mobile_area_bar_btn ${
+                  selectedPannel === "shell" ? "selected_pannel_btn " : ""
+                }`}
+                onClick={() => {
+                  setSelectedPannel("shell");
+                }}
+              >
+                shell
+              </button>
+            </div>
+            <div className="mobile_area_bar_right">
+              <button
+                className="mobile_area_bar_run_btn"
+                onClick={() => {
+                  // compileCode();
+                  setSelectedPannel("shell");
+                }}
+              >
+                <BiRightArrow />
+              </button>
+            </div>
+          </div>
+          <div className="code-area-bar ">
+            <span className="code-filename">
+              main.{selected_language.file_extension}
+            </span>
             <button
-              className={`mobile_area_bar_btn ${
-                selectedPannel === "main" ? "selected_pannel_btn " : ""
-              }`}
+              className="code-run-btn"
+              // onClick={compileCode}
               onClick={() => {
-                setSelectedPannel("main");
+                setOutput(
+                  `> Enable the compileCode() function to run the code`
+                );
               }}
             >
-              main.py
-            </button>
-            <button
-              className={`mobile_area_bar_btn ${
-                selectedPannel === "shell" ? "selected_pannel_btn " : ""
-              }`}
-              onClick={() => {
-                setSelectedPannel("shell");
-              }}
-            >
-              shell
+              Run
             </button>
           </div>
-          <div className="mobile_area_bar_right">
-            <button
-              className="mobile_area_bar_run_btn"
-              onClick={() => {
-                // compileCode();
-                setSelectedPannel("shell");
-              }}
-            >
-              <BiRightArrow />
-            </button>
+          <div className={`code-snippet `}>
+            <Editor codeSnippet={codeSnippet} setCodeSnippet={setCodeSnippet} />
           </div>
         </div>
-        <div className="code-area-bar ">
-          <span className="code-filename">
-            main.{selected_language.file_extension}
-          </span>
-          <button
-            className="code-run-btn"
-            // onClick={compileCode}
-            onClick={() => {
-              setOutput(`> Enable the compileCode() function to run the code`);
-            }}
-          >
-            Run
-          </button>
-        </div>
-        <div className={`code-snippet `}>
-          <Editor codeSnippet={codeSnippet} setCodeSnippet={setCodeSnippet} />
+        <div
+          className={`output-area ${
+            selectedPannel === "shell" ? "show" : "hide"
+          }`}
+        >
+          <div className="mobile_area_bar flex md:hidden">
+            <div className="mobile_area_bar_left">
+              <button
+                className={`mobile_area_bar_btn ${
+                  selectedPannel === "main" ? "selected_pannel_btn " : ""
+                }`}
+                onClick={() => {
+                  setSelectedPannel("main");
+                }}
+              >
+                main.py
+              </button>
+              <button
+                className={`mobile_area_bar_btn ${
+                  selectedPannel === "shell" ? "selected_pannel_btn " : ""
+                }`}
+                onClick={() => {
+                  setSelectedPannel("shell");
+                }}
+              >
+                shell
+              </button>
+            </div>
+            <div className="mobile_area_bar_right">
+              <button
+                className="mobile_area_bar_run_btn"
+                onClick={() => {
+                  // compileCode();
+                  setSelectedPannel("shell");
+                }}
+              >
+                <BiRightArrow />
+              </button>
+            </div>
+          </div>
+          <div className="output-area-bar">
+            <span className="output-area-title">Shell</span>
+            <button className="output-clear-btn" onClick={() => setOutput(">")}>
+              Clear
+            </button>
+          </div>
+          <textarea
+            name="code-output"
+            id=""
+            cols="30"
+            rows="19"
+            value={output}
+            className={`border-solid border-2 border-black `}
+            readOnly
+          ></textarea>
         </div>
       </div>
-      <div
-        className={`output-area ${
-          selectedPannel === "shell" ? "show" : "hide"
-        }`}
-      >
-        <div className="mobile_area_bar flex md:hidden">
-          <div className="mobile_area_bar_left">
-            <button
-              className={`mobile_area_bar_btn ${
-                selectedPannel === "main" ? "selected_pannel_btn " : ""
-              }`}
-              onClick={() => {
-                setSelectedPannel("main");
-              }}
-            >
-              main.py
-            </button>
-            <button
-              className={`mobile_area_bar_btn ${
-                selectedPannel === "shell" ? "selected_pannel_btn " : ""
-              }`}
-              onClick={() => {
-                setSelectedPannel("shell");
-              }}
-            >
-              shell
-            </button>
-          </div>
-          <div className="mobile_area_bar_right">
-            <button
-              className="mobile_area_bar_run_btn"
-              onClick={() => {
-                // compileCode();
-                setSelectedPannel("shell");
-              }}
-            >
-              <BiRightArrow />
-            </button>
-          </div>
-        </div>
-        <div className="output-area-bar">
-          <span className="output-area-title">Shell</span>
-          <button className="output-clear-btn" onClick={() => setOutput(">")}>
-            Clear
-          </button>
-        </div>
-        <textarea
-          name="code-output"
-          id=""
-          cols="30"
-          rows="19"
-          value={output}
-          className={`border-solid border-2 border-black `}
-          readOnly
-        ></textarea>
-      </div>
-    </div>
+    </>
   );
 };
 

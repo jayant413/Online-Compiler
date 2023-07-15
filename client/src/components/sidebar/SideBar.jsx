@@ -33,6 +33,7 @@ const SideBar = ({ setOutput, setSelectedPannel }) => {
                     id: l.id,
                     snippet: l.snippet,
                     file_extension: l.file_extension,
+                    logo_coloured: l.logo_coloured,
                   })
                 );
               }}

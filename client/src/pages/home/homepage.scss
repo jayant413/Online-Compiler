@@ -81,6 +81,9 @@ $breakpoint: 768px;
         outline: none;
         border-radius: 5px;
         font-weight: bold;
+        &:hover {
+          background: rgba(79, 79, 79, 0.619);
+        }
       }
     }
 
@@ -88,7 +91,7 @@ $breakpoint: 768px;
       resize: none;
       background-color: transparent;
       height: 90%;
-      width: 90%;
+      width: 100%;
       outline: none;
       border: none;
       padding: 2rem;

@@ -1,0 +1,130 @@
+.signUp-area {
+  background: linear-gradient(to right, #9966ff 0%, #0099ff 100%);
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+.signup {
+  color: white;
+  background: #136a8a;
+  background: -webkit-linear-gradient(to top left, #6404e2 0%, #1458ec 100%);
+  background: linear-gradient(to top left, #6404e2 0%, #1458ec 100%);
+  margin: auto 3rem;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2), 0px 10px 20px rgba(0, 0, 0, 0.3),
+    0px 30px 60px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 50px;
+}
+.signup .head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 2rem 0;
+}
+.signup .head .company {
+  font-size: 2.2em;
+}
+.signup .msg {
+  text-align: center;
+  margin: 0 0 2rem 0;
+}
+
+.signup .form input[type="text"].text {
+  border: none;
+  background: none;
+  box-shadow: 0px 2px 0px 0px white;
+  width: 100%;
+  color: white;
+  font-size: 1em;
+  outline: none;
+  margin: 0 0 1rem 0;
+}
+.signup .form .text::placeholder {
+  color: #d3d3d3;
+}
+.signup .form input[type="password"].password {
+  border: none;
+  background: none;
+  box-shadow: 0px 2px 0px 0px white;
+  width: 100%;
+  color: white;
+  font-size: 1em;
+  outline: none;
+  margin: 0 0 3rem 0;
+}
+.signup .form .password::placeholder {
+  color: #d3d3d3;
+}
+.signup .form input[type="email"].email {
+  border: none;
+  background: none;
+  box-shadow: 0px 2px 0px 0px white;
+  width: 100%;
+  color: white;
+  font-size: 1em;
+  outline: none;
+
+  margin: 25px 0 3rem 0;
+  &::placeholder {
+    color: #d3d3d3;
+  }
+}
+.signup .form .btn-signup {
+  background: none;
+  text-decoration: none;
+  color: white;
+  box-shadow: 0px 0px 0px 2px white;
+  border-radius: 3px;
+  padding: 5px 2em;
+  transition: 0.5s;
+  @media (max-width: 798px) {
+    padding: 5px 1em;
+    margin-top: 12rem;
+  }
+}
+.signup .form .btn-signup:hover {
+  background: white;
+  color: dimgray;
+  transition: 0.5s;
+}
+.signup .login {
+  background: none;
+  text-decoration: none;
+  color: white;
+  float: right;
+  border-radius: 3px;
+  box-shadow: 0px 0px 0px 2px white;
+  padding: 4px 2rem;
+  margin: -4px 0px;
+  @media (max-width: 798px) {
+    padding: 4px 1rem;
+  }
+}
+.signup .login:hover {
+  background: white;
+  color: dimgray;
+  transition: 0.5s;
+}
+
+footer {
+  position: absolute;
+  color: #136a8a;
+  bottom: 10px;
+  padding-left: 20px;
+}
+footer p {
+  display: inline;
+}
+footer a {
+  color: green;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+footer .heart {
+  color: #b22222;
+  font-size: 1.5em;
+}
