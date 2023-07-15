@@ -4,10 +4,12 @@ import axios from "axios";
 import "./homepage.scss";
 import { useSelector } from "react-redux";
 import Editor from "../../components/Editor/Editor";
-import { createApiSubmission, getApiSubmission } from "../../utils/api";
+import { BiRightArrow } from "react-icons/bi";
 
 const HomePage = () => {
   const selected_language = useSelector((state) => state.language);
+  const [selectedPannel, setSelectedPannel] = useState("main");
+  const [answer, setAnswer] = useState("");
   const [codeSnippet, setCodeSnippet] = useState(
     atob(selected_language.snippet)
   );
@@ -17,11 +19,23 @@ const HomePage = () => {
     setCodeSnippet(atob(selected_language.snippet));
   }, [selected_language.snippet]);
 
-  const compileCode = async () => {
-    /***
-     * API on Server
-     */
+  useEffect(() => {
+    const decode = window.atob(answer);
+    setOutput(`>  ${decode}`);
+  }, [answer]);
 
+  const getAnswer = async (token) => {
+    let response = await axios.get(
+      `http://localhost:8080/api/v1/submissions/${token}`
+    );
+    if (response.data.result.status.id === 3) {
+      setAnswer(response.data.result.stdout);
+    } else {
+      getAnswer(token);
+    }
+  };
+
+  /* const compileCode = async () => {
     const encode = window.btoa(codeSnippet);
     const submissionResponse = await axios.post(
       "http://localhost:8080/api/v1/submissions",
@@ -31,73 +45,109 @@ const HomePage = () => {
       }
     );
     let token = submissionResponse.data.token;
-    const outputResponse = await axios.get(
-      `http://localhost:8080/api/v1/submissions/${token}`
-    );
-    // console.log(outputResponse);
-    let answer;
-    !outputResponse.data.result.stdout === null
-      ? (answer = outputResponse.data.result.stdout)
-      : (answer = outputResponse.data.result.stderr);
-    const decode = window.atob(answer);
-    // console.log(decode);
-    setOutput(`>  ${decode}`);
-
-    /***
-     *  API within client
-     */
-
-    // const source_code = window.btoa(codeSnippet);
-    // const data = {
-    //   language_id: selected_language.id,
-    //   source_code: source_code,
-    // };
-
-    // const submissionResponse = createApiSubmission(data);
-    // console.log(submissionResponse);
-
-    // let token = submissionResponse.data.token;
-
-    // const outputResponse = getApiSubmission(token);
-    // console.log(outputResponse);
-    // let answer;
-    // !outputResponse.data.result.stdout === null
-    //   ? (answer = outputResponse.data.result.stdout)
-    //   : (answer = outputResponse.data.result.stderr);
-
-    // const decode = window.atob(answer);
-    // console.log(decode);
-    // setOutput(`>  ${decode}`);
+    getAnswer(token);
   };
-
+*/
   return (
     <div className="home">
-      <SideBar />
-      <div className="code-area">
-        <div className="code-area-bar">
+      <SideBar setOutput={setOutput} setSelectedPannel={setSelectedPannel} />
+
+      <div
+        className={`code-area ${selectedPannel === "main" ? "show" : "hide"}`}
+      >
+        <div className="mobile_area_bar flex md:hidden">
+          <div className="mobile_area_bar_left">
+            <button
+              className={`mobile_area_bar_btn ${
+                selectedPannel === "main" ? "selected_pannel_btn " : ""
+              }`}
+              onClick={() => {
+                setSelectedPannel("main");
+              }}
+            >
+              main.py
+            </button>
+            <button
+              className={`mobile_area_bar_btn ${
+                selectedPannel === "shell" ? "selected_pannel_btn " : ""
+              }`}
+              onClick={() => {
+                setSelectedPannel("shell");
+              }}
+            >
+              shell
+            </button>
+          </div>
+          <div className="mobile_area_bar_right">
+            <button
+              className="mobile_area_bar_run_btn"
+              onClick={() => {
+                // compileCode();
+                setSelectedPannel("shell");
+              }}
+            >
+              <BiRightArrow />
+            </button>
+          </div>
+        </div>
+        <div className="code-area-bar ">
           <span className="code-filename">
-            main.{selected_language.extension}
+            main.{selected_language.file_extension}
           </span>
-          <button className="code-run-btn" onClick={compileCode}>
+          <button
+            className="code-run-btn"
+            // onClick={compileCode}
+            onClick={() => {
+              setOutput(`> Enable the compileCode() function to run the code`);
+            }}
+          >
             Run
           </button>
         </div>
-        <div className="code-snippet">
-          {/* <textarea
-            name="code-snippet"
-            id="realtimeEditor"
-            cols="30"
-            rows="10"
-            className=""
-            value={codeSnippet}
-            onChange={(e) => {
-              setCodeSnippet(e.target.value);
-            }}
-          ></textarea> */}
+        <div className={`code-snippet `}>
           <Editor codeSnippet={codeSnippet} setCodeSnippet={setCodeSnippet} />
         </div>
       </div>
-      <div className="output-area">
+      <div
+        className={`output-area ${
+          selectedPannel === "shell" ? "show" : "hide"
+        }`}
+      >
+        <div className="mobile_area_bar flex md:hidden">
+          <div className="mobile_area_bar_left">
+            <button
+              className={`mobile_area_bar_btn ${
+                selectedPannel === "main" ? "selected_pannel_btn " : ""
+              }`}
+              onClick={() => {
+                setSelectedPannel("main");
+              }}
+            >
+              main.py
+            </button>
+            <button
+              className={`mobile_area_bar_btn ${
+                selectedPannel === "shell" ? "selected_pannel_btn " : ""
+              }`}
+              onClick={() => {
+                setSelectedPannel("shell");
+              }}
+            >
+              shell
+            </button>
+          </div>
+          <div className="mobile_area_bar_right">
+            <button
+              className="mobile_area_bar_run_btn"
+              onClick={() => {
+                // compileCode();
+                setSelectedPannel("shell");
+              }}
+            >
+              <BiRightArrow />
+            </button>
+          </div>
+        </div>
         <div className="output-area-bar">
           <span className="output-area-title">Shell</span>
           <button className="output-clear-btn" onClick={() => setOutput(">")}>
@@ -108,9 +158,9 @@ const HomePage = () => {
           name="code-output"
           id=""
           cols="30"
-          rows="10"
+          rows="19"
           value={output}
-          className="border-solid border-2 border-black"
+          className={`border-solid border-2 border-black `}
           readOnly
         ></textarea>
       </div>

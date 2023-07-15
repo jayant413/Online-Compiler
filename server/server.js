@@ -30,6 +30,9 @@ app.use(cors({
 // routes
 app.use("/api", apiRoutes)
 
+app.get("/", async (req, res) => {
+    res.status(200).send("<h1> Welcome to online Compiler API </h1>  <h2> Please Enter a valid url from below: </h2> <h4> GET Languages : /api/v1/languages </h4> <h4> GET Language by ID : /api/v1/languages/:language_id </h4>")
+})
 app.get("*", async (req, res) => {
     res.status(200).send("<h1> Welcome to online Compiler API </h1>  <h2> Please Enter a valid url from below: </h2> <h4> GET Languages : /api/v1/languages </h4> <h4> GET Language by ID : /api/v1/languages/:language_id </h4>")
 })

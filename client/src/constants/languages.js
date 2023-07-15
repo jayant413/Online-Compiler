@@ -14,7 +14,7 @@ import {
     r_coloured,
     rust_coloured,
 } from '../assets/images/languageLogo'
-import { langs } from "@uiw/codemirror-extensions-langs";
+
 
 const languages = [
     {
@@ -37,7 +37,7 @@ const languages = [
     },
     {
         id: 54,
-        name: "C++",
+        name: "CPP",
         logo: cpp,
         logo_coloured: cpp_coloured,
         snippet: "Ly8gT25saW5lIEMrKyBjb21waWxlciB0byBydW4gQysrIHByb2dyYW0gb25saW5lCiNpbmNsdWRlIDxpb3N0cmVhbT4KCmludCBtYWluKCkgewogICAgLy8gV3JpdGUgQysrIGNvZGUgaGVyZQogICAgc3RkOjpjb3V0IDw8ICJIZWxsbyB3b3JsZCEiOwoKICAgIHJldHVybiAwOwp9",

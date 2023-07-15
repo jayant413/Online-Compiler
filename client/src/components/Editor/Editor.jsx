@@ -11,7 +11,7 @@ const Editor = ({ codeSnippet, setCodeSnippet }) => {
     <div>
       <CodeMirror
         height="82vh"
-        width="44.9vw"
+        width="100%"
         theme={darcula}
         className="codeMirror_editor"
         value={codeSnippet}
@@ -21,7 +21,7 @@ const Editor = ({ codeSnippet, setCodeSnippet }) => {
             ? langs.python()
             : selected_language.name === "C"
             ? langs.c()
-            : selected_language.name === "C++"
+            : selected_language.name === "CPP"
             ? langs.cpp()
             : selected_language.name === "Java"
             ? langs.java()

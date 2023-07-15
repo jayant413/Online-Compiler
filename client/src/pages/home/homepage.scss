@@ -1,3 +1,6 @@
+$breakpoint: 768px;
+// Write the SCSS code within a media query
+
 .home {
   display: grid;
   grid-template-columns: 10vw 45vw 45vw;
@@ -8,6 +11,9 @@
     width: 100%;
     border-right: 1px solid rgba(255, 255, 255, 0.2);
     background-color: #1c2130;
+    .mobile_area_bar {
+      display: none;
+    }
     .code-area-bar {
       background-color: #2f3033;
       display: flex;
@@ -77,6 +83,7 @@
         font-weight: bold;
       }
     }
+
     textarea {
       resize: none;
       background-color: transparent;
@@ -86,5 +93,110 @@
       border: none;
       padding: 2rem;
     }
+  }
+}
+
+@media (max-width: $breakpoint) {
+  // Your styles for the specified breakpoint
+  .home {
+    grid-template-columns: 15vw 85vw;
+
+    .code-area {
+      .mobile_area_bar {
+        display: flex;
+        height: 8vh;
+        background-color: #2f3033;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        align-items: center;
+        justify-content: space-around;
+        .mobile_area_bar_left {
+          .mobile_area_bar_btn {
+            padding: 0.3rem 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            &.selected_pannel_btn {
+              background-color: blue;
+              border: none;
+            }
+            &:first-child {
+              border-radius: 5px 0 0 5px;
+            }
+            &:nth-child(2) {
+              border-radius: 0 5px 5px 0;
+            }
+            &:hover {
+              background: #0556f3;
+            }
+          }
+        }
+        .mobile_area_bar_right {
+          .mobile_area_bar_run_btn {
+            padding: 0.3rem 1rem;
+            background: blue;
+            border-radius: 5px;
+            &:hover {
+              background: #0556f3;
+            }
+          }
+        }
+      }
+      .code-area-bar {
+        display: none;
+      }
+    }
+    .output-area {
+      // display: none;
+      .mobile_area_bar {
+        display: flex;
+        height: 8vh;
+        background-color: #2f3033;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        align-items: center;
+        justify-content: space-around;
+        .mobile_area_bar_left {
+          .mobile_area_bar_btn {
+            padding: 0.3rem 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            &.selected_pannel_btn {
+              background-color: blue;
+              border: none;
+            }
+            &:first-child {
+              border-radius: 5px 0 0 5px;
+            }
+            &:nth-child(2) {
+              border-radius: 0 5px 5px 0;
+            }
+            &:hover {
+              background: #0556f3;
+            }
+          }
+        }
+        .mobile_area_bar_right {
+          .mobile_area_bar_run_btn {
+            padding: 0.3rem 1rem;
+            background: blue;
+            border-radius: 5px;
+            &:hover {
+              background: #0556f3;
+            }
+          }
+        }
+      }
+      .output-area-bar {
+        display: none;
+      }
+      textarea {
+        padding: 1rem 0.3rem;
+      }
+    }
+  }
+
+  .show {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hide {
+    display: none;
   }
 }

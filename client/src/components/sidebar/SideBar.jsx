@@ -2,55 +2,75 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLanuage } from "../../store/language";
 import { languages } from "../../constants/languages";
+import { FaPython, FaRust, FaJava } from "react-icons/fa";
+import { TbBrandCpp, TbBrandJavascript } from "react-icons/tb";
+import { SiCsharp, SiPhp } from "react-icons/si";
+import { MdOutlineSegment } from "react-icons/md";
+import { BsRCircleFill, BsFillCCircleFill } from "react-icons/bs";
+
 import "./sidebar.scss";
 
-const SideBar = () => {
+const SideBar = ({ setOutput, setSelectedPannel }) => {
   // const [toggleLogo, setToggleLogo] = useState(false);
   const selected_language = useSelector((state) => state.language);
   const dispatch = useDispatch();
 
   return (
     <div className="sidebar">
-      <div className="sidebar_logo_name">
-        {/* <ul className="sidebar_language_logos">
-          {languages.map((l, i) => {
-            return (
-              <li key={i}>
-                <img
-                  src={l.logo_coloured}
-                  alt=""
-                  className={`language_logo ${
-                    l.name == "Python" ? "selected_language" : ""
-                  }`}
-                />
-              </li>
-            );
-          })}
-        </ul> */}
-        <ul className="sidebar_language_names">
-          {languages.map((l, i) => {
-            return (
-              <li
-                className={` 
-                ${selected_language.id == l.id ? "selected_language" : ""}`}
-                key={i}
-                onClick={() => {
-                  dispatch(
-                    setLanuage({
-                      name: l.name,
-                      id: l.id,
-                      snippet: l.snippet,
-                      file_extension: l.file_extension,
-                    })
-                  );
-                }}
-              >
-                <span className="language_name">{l.name}</span>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <ul className="sidebar_language_names ">
+        {languages.map((l, i) => {
+          return (
+            <li
+              className={`
+                ${selected_language.id == l.id ? "selected_language " : ""}`}
+              key={i}
+              onClick={() => {
+                setSelectedPannel("main");
+                setOutput(">");
+                dispatch(
+                  setLanuage({
+                    name: l.name,
+                    id: l.id,
+                    snippet: l.snippet,
+                    file_extension: l.file_extension,
+                  })
+                );
+              }}
+            >
+              <span className="language_logo flex">
+                {l.name === "Python" ? (
+                  <FaPython />
+                ) : l.name === "Rust" ? (
+                  <FaRust />
+                ) : l.name === "CPP" ? (
+                  <TbBrandCpp />
+                ) : l.name === "C#" ? (
+                  <SiCsharp />
+                ) : l.name === "Java" ? (
+                  <FaJava />
+                ) : l.name === "JavaScript" ? (
+                  <TbBrandJavascript />
+                ) : l.name === "Go" ? (
+                  <MdOutlineSegment />
+                ) : l.name === "PHP" ? (
+                  <SiPhp />
+                ) : l.name === "R" ? (
+                  <BsRCircleFill />
+                ) : l.name === "C" ? (
+                  <BsFillCCircleFill />
+                ) : (
+                  ""
+                )}
+
+                <span className="md:hidden language_logo_go">
+                  {l.name === "Go" ? "Go" : ""}
+                </span>
+              </span>
+              <span className="language_name  ">{l.name}</span>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
