@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLanuage } from "../../store/language";
+import { setLanuage } from "../../store/slices/language";
 import { languages } from "../../constants/languages";
 import { FaPython, FaRust, FaJava } from "react-icons/fa";
 import { TbBrandCpp, TbBrandJavascript } from "react-icons/tb";

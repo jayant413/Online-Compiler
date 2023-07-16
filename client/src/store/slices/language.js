@@ -15,7 +15,7 @@ import {
     php_coloured,
     r_coloured,
     rust_coloured,
-} from '../assets/images/languageLogo'
+} from '../../assets/images/languageLogo/index'
 
 export const language = createSlice({
     name: "language",

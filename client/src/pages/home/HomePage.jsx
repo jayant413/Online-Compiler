@@ -6,6 +6,7 @@ import "./homepage.scss";
 import { useSelector } from "react-redux";
 import Editor from "../../components/Editor/Editor";
 import { BiRightArrow } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const selected_language = useSelector((state) => state.language);
@@ -15,6 +16,8 @@ const HomePage = () => {
     atob(selected_language.snippet)
   );
   const [output, setOutput] = useState(">");
+  const authData = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setCodeSnippet(atob(selected_language.snippet));
@@ -119,6 +122,29 @@ const HomePage = () => {
             selectedPannel === "shell" ? "show" : "hide"
           }`}
         >
+          {authData.user ? (
+            ""
+          ) : (
+            <div className="login_layer">
+              <span className="login_layer_msg">
+                Please login to Run the code
+              </span>
+              <div className="login_layer_btns">
+                <button
+                  className="login_layer_btn"
+                  onClick={() => navigate("/login")}
+                >
+                  Login
+                </button>
+                <button
+                  className="login_layer_btn"
+                  onClick={() => navigate("/signup")}
+                >
+                  Signup
+                </button>
+              </div>
+            </div>
+          )}
           <div className="mobile_area_bar flex md:hidden">
             <div className="mobile_area_bar_left">
               <button

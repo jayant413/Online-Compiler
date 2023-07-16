@@ -1,3 +1,5 @@
+$breakpoint: 768px;
+
 .nav {
   max-width: 100vw;
   height: 10vh;
@@ -11,8 +13,13 @@
     color: white;
     .nav_logo {
       width: 8rem;
+
       cursor: pointer;
       // height: inherit;
+    }
+    .mobile_nav_logo {
+      width: 3rem;
+      // height: 2rem;
     }
   }
   .nav_middle {
@@ -22,25 +29,42 @@
     align-items: center;
     .nav_middle_logo {
       height: 25px;
-      margin: 0 0.5rem;
+      margin: 0 0.2rem;
     }
     .nav_middle_name {
-      color: #b7da29;
-      margin: 0 0.5rem;
-      font-size: 20px;
-      font-weight: 500;
+      color: #1185f9;
+      font-size: 18px;
+      margin: 0 1rem;
+      // text-shadow: -2px 3px 7px #530096;
+      text-shadow: 0px 0px 0 rgb(-33, 89, 211), -1px 1px 0 rgb(-78, 44, 166),
+        -2px 2px 0 rgb(-122, 0, 122), -3px 3px 2px rgba(83, 0, 150, 1),
+        -3px 3px 1px rgba(83, 0, 150, 0.5), 0px 0px 2px rgba(83, 0, 150, 0.2);
+      &:hover {
+        color: #00a6ff;
+      }
     }
   }
   .nav_right {
     .nav_right_btn {
       background: #045cfb;
-      padding: 0.2rem 0.5rem;
-      margin: 0 0.5rem;
+      padding: 0.2rem 0.4rem;
+      margin: 0 0.2rem;
       border-radius: 5px;
       color: white;
-      font-weight: 400;
+      font-weight: 500;
       &:hover {
         background: blue;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint) {
+  .nav {
+    padding: 0 0.5rem 0 0.5rem;
+    .nav_middle {
+      .nav_middle_name {
+        margin: 0 0.2rem;
       }
     }
   }

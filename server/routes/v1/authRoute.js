@@ -4,7 +4,7 @@ import { signUpController, logInController } from "../../controllers/authControl
 const router = express.Router();
 
 // Register Router
-router.post("/register", signUpController)
+router.post("/signup", signUpController)
 
 // LogIn Router
 router.post("/login", logInController)

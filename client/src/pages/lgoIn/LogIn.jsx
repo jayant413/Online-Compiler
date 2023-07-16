@@ -1,14 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import "./logIn.scss";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAuthData } from "../../store/slices/auth";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const LogIn = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const res = await axios.post(`http://localhost:8080/api/v1/auth/login`, {
+      email,
+      password,
+    });
+
+    try {
+      if (res && res.data.success) {
+        toast.success(res.data.message);
+        alert(res.data.message);
+        dispatch(
+          setAuthData({
+            user: res.data.user,
+            token: res.data.token,
+          })
+        );
+        localStorage.setItem("auth_online_compiler", JSON.stringify(res.data));
+        navigate("/");
+      }
+    } catch (error) {
+      toast.success(res.data.message);
+      alert(res.data.message);
+    }
+  };
+
   return (
     <div className="logIn">
       <section className="login" id="login">
         <div className="head">
-          <a href="/" className="company">
+          <Link to="/" className="company">
             Programiz LogIn
-          </a>
+          </Link>
         </div>
         <p className="msg">Welcome back</p>
         <div className="form">
@@ -18,6 +55,8 @@ const LogIn = () => {
               placeholder="Email"
               className="text"
               id="username"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <br />
@@ -25,14 +64,17 @@ const LogIn = () => {
               type="password"
               placeholder="Password"
               className="password"
+              value={password}
+              required
+              onChange={(e) => setPassword(e.target.value)}
             />
             <br />
-            <a href="#" className="btn-login" id="do-login">
+            <button className="btn-login" id="do-login" onClick={handleLogin}>
               Login
-            </a>
-            <a href="/signUp" className="signUp">
+            </button>
+            <Link to="/signup" className="signUp">
               SignUp
-            </a>
+            </Link>
           </form>
         </div>
       </section>
