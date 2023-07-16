@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "./navbar.scss";
 import logo from "../../assets/images/logo.png";
 import mobile_logo from "../../assets/images/title_logo.png";
-
+import { BsPersonLinesFill } from "react-icons/bs";
+import { BiLogOut } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setAuthData } from "../../store/slices/auth";
 import spinner from "../../assets/images/spinner.gif";
+import profile from "../../assets/images/profile.png";
 
 const Navbar = ({ loading }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [profileMenu, setProfileMenu] = useState(false);
   const selected_language = useSelector((state) => state.language);
   const authData = useSelector((state) => state.auth);
 
@@ -53,9 +56,34 @@ const Navbar = ({ loading }) => {
       <div className="nav_right">
         {authData.user ? (
           <>
-            <button className="nav_right_btn" onClick={() => handleLogout()}>
-              Logout
-            </button>
+            <span className="nav_right_username ">{authData.user.name}</span>
+            <div
+              onClick={() => {
+                setProfileMenu(!profileMenu);
+              }}
+            >
+              <img src={profile} alt="profile" className="profile_img" />
+              {profileMenu ? (
+                <div className="profile_menu">
+                  <ul className="font-semibold">
+                    <li className="flex md:hidden">{authData.user.name}</li>
+                    <li onClick={() => alert("Work In Progress")}>
+                      {" "}
+                      <BsPersonLinesFill />
+                      Your Profile
+                    </li>
+                    <li>
+                      <button onClick={() => handleLogout()}>
+                        <BiLogOut />
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
           </>
         ) : (
           <>

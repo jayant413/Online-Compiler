@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+* {
+  transition: 0.5s;
+}
 
 ::-webkit-scrollbar {
   width: 4px;

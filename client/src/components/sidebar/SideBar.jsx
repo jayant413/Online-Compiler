@@ -16,7 +16,7 @@ const SideBar = ({ setOutput, setSelectedPannel }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="sidebar">
+    <div className="sidebar ">
       <ul className="sidebar_language_names ">
         {languages.map((l, i) => {
           return (
@@ -71,6 +71,13 @@ const SideBar = ({ setOutput, setSelectedPannel }) => {
             </li>
           );
         })}
+        <a
+          href="https://jayantsawarkar.vercel.app/"
+          target="_blank"
+          className="text-[10px] font-normal cursor-default m-2 text-justify md:flex hidden "
+        >
+          Programiz &copy; Cloned By Jayant{" "}
+        </a>
       </ul>
     </div>
   );

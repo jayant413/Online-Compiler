@@ -45,6 +45,62 @@ $breakpoint: 768px;
     }
   }
   .nav_right {
+    display: flex;
+    width: 10vw;
+    align-items: center;
+
+    .nav_right_username {
+      color: white;
+      margin: 1rem;
+      cursor: default;
+      font-weight: 500;
+      margin: 0;
+    }
+    .profile_img {
+      position: relative;
+      width: 2rem;
+      margin: 0 1rem;
+      background: white;
+      border-radius: 50%;
+      cursor: pointer;
+      &:hover {
+        background: rgb(232, 231, 231);
+      }
+    }
+    .profile_menu {
+      position: absolute;
+      z-index: 10;
+      top: 7vh;
+      right: 7vw;
+      background-color: white;
+      border-radius: 10px 0 10px 10px;
+      padding: 10px 30px 10px 10px;
+      width: fit-content;
+      ul {
+        width: 8rem;
+        li {
+          margin: 7px 0;
+          padding: 5px 10px;
+          border-bottom: 1px solid rgb(183, 180, 180);
+          border-radius: 10px;
+          color: #4c23ea;
+          cursor: pointer;
+          &:first-child {
+            border: none;
+            cursor: default;
+            color: black;
+            &:hover {
+              background: white;
+              color: black;
+            }
+          }
+          &:hover {
+            background: gray;
+            color: white;
+          }
+        }
+      }
+    }
     .nav_right_btn {
       background: #045cfb;
       padding: 0.2rem 0.4rem;
@@ -65,6 +121,14 @@ $breakpoint: 768px;
     .nav_middle {
       .nav_middle_name {
         margin: 0 0.2rem;
+      }
+    }
+    .nav_right {
+      .nav_right_username {
+        display: none;
+      }
+      .profile_menu {
+        // right: 15px;
       }
     }
   }
