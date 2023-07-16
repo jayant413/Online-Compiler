@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./navbar.scss";
 import logo from "../../assets/images/logo.png";
 import mobile_logo from "../../assets/images/title_logo.png";
-import { BsPersonLinesFill } from "react-icons/bs";
-import { BiLogOut } from "react-icons/bi";
+import { BsPersonLinesFill, BsPersonFillAdd } from "react-icons/bs";
+import { BiLogOut, BiLogIn } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setAuthData } from "../../store/slices/auth";
@@ -54,53 +54,53 @@ const Navbar = ({ loading }) => {
         )}
       </div>
       <div className="nav_right">
-        {authData.user ? (
-          <>
-            <span className="nav_right_username ">{authData.user.name}</span>
-            <div
-              onClick={() => {
-                setProfileMenu(!profileMenu);
-              }}
-            >
-              <img src={profile} alt="profile" className="profile_img" />
-              {profileMenu ? (
-                <div className="profile_menu">
-                  <ul className="font-semibold">
-                    <li className="flex md:hidden">{authData.user.name}</li>
+        <span className="nav_right_username ">
+          {authData ? authData?.user?.name : ""}
+        </span>
+        <div
+          onClick={() => {
+            setProfileMenu(!profileMenu);
+          }}
+          className="nav_right_profile"
+        >
+          <img src={profile} alt="profile" className="profile_img" />
+          {profileMenu ? (
+            <div className="profile_menu">
+              <ul className="font-semibold">
+                {authData?.user ? (
+                  <>
+                    <li className="flex md:hidden profile_username">
+                      {authData?.user?.name}
+                    </li>
                     <li onClick={() => alert("Work In Progress")}>
                       {" "}
                       <BsPersonLinesFill />
                       Your Profile
                     </li>
-                    <li>
-                      <button onClick={() => handleLogout()}>
-                        <BiLogOut />
-                        Logout
-                      </button>
+                    <li onClick={() => handleLogout()}>
+                      <BiLogOut />
+                      Logout
                     </li>
-                  </ul>
-                </div>
-              ) : (
-                ""
-              )}
+                  </>
+                ) : (
+                  <>
+                    <li onClick={() => navigate("/login")}>
+                      {" "}
+                      <BiLogIn />
+                      Login
+                    </li>
+                    <li onClick={() => navigate("/signup")}>
+                      {" "}
+                      <BsPersonFillAdd /> Signup
+                    </li>
+                  </>
+                )}
+              </ul>
             </div>
-          </>
-        ) : (
-          <>
-            <button
-              className="nav_right_btn"
-              onClick={() => navigate("/login")}
-            >
-              Login
-            </button>
-            <button
-              className="nav_right_btn"
-              onClick={() => navigate("/signup")}
-            >
-              Signup
-            </button>
-          </>
-        )}
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </div>
   );

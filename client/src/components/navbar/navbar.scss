@@ -56,47 +56,40 @@ $breakpoint: 768px;
       font-weight: 500;
       margin: 0;
     }
-    .profile_img {
+    .nav_right_profile {
       position: relative;
-      width: 2rem;
-      margin: 0 1rem;
-      background: white;
-      border-radius: 50%;
-      cursor: pointer;
-      &:hover {
-        background: rgb(232, 231, 231);
+      .profile_img {
+        width: 2rem;
+        margin: 0 1rem;
+        background: white;
+        border-radius: 50%;
+        cursor: pointer;
+        &:hover {
+          background: rgb(232, 231, 231);
+        }
       }
-    }
-    .profile_menu {
-      position: absolute;
-      z-index: 10;
-      top: 7vh;
-      right: 7vw;
-      background-color: white;
-      border-radius: 10px 0 10px 10px;
-      padding: 10px 30px 10px 10px;
-      width: fit-content;
-      ul {
-        width: 8rem;
-        li {
-          margin: 7px 0;
-          padding: 5px 10px;
-          border-bottom: 1px solid rgb(183, 180, 180);
-          border-radius: 10px;
-          color: #4c23ea;
-          cursor: pointer;
-          &:first-child {
-            border: none;
-            cursor: default;
-            color: black;
+      .profile_menu {
+        position: absolute;
+        z-index: 10;
+        top: 5vh;
+        right: 2vw;
+        background-color: white;
+        border-radius: 10px 0 10px 10px;
+        padding: 10px 30px 10px 10px;
+        width: fit-content;
+        ul {
+          width: 8rem;
+          li {
+            margin: 7px 0;
+            padding: 5px 10px;
+            border-bottom: 1px solid rgb(183, 180, 180);
+            border-radius: 10px;
+            color: #4c23ea;
+            cursor: pointer;
             &:hover {
-              background: white;
-              color: black;
+              background: gray;
+              color: white;
             }
-          }
-          &:hover {
-            background: gray;
-            color: white;
           }
         }
       }
@@ -124,11 +117,24 @@ $breakpoint: 768px;
       }
     }
     .nav_right {
+      margin-right: 20px;
       .nav_right_username {
         display: none;
       }
       .profile_menu {
-        // right: 15px;
+        ul {
+          li {
+            .profile_username {
+              border: none;
+              cursor: default;
+              color: black;
+              &:hover {
+                background: white;
+                color: black;
+              }
+            }
+          }
+        }
       }
     }
   }
