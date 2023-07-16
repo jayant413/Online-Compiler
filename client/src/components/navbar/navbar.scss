@@ -124,7 +124,7 @@ $breakpoint: 768px;
       .profile_menu {
         ul {
           li {
-            .profile_username {
+            &.profile_username {
               border: none;
               cursor: default;
               color: black;
