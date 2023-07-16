@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./signUp.scss";
 import axios from "axios";
 import toast from "react-hot-toast";
+import logo from "../../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
@@ -12,11 +13,14 @@ const SignUp = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    const res = await axios.post(`http://localhost:8080/api/v1/auth/signup`, {
-      name,
-      email,
-      password,
-    });
+    const res = await axios.post(
+      `https://online-compiler-server.vercel.app/api/v1/auth/signup`,
+      {
+        name,
+        email,
+        password,
+      }
+    );
 
     try {
       if (res && res.data.success) {
@@ -35,7 +39,7 @@ const SignUp = () => {
       <section className="signup" id="signup">
         <div className="head">
           <Link to="/" className="company">
-            Programiz SignUp
+            <img src={logo} alt="logo" className="signup_logo" />
           </Link>
         </div>
         <p className="msg">Welcome to Online Compiler</p>

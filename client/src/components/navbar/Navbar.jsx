@@ -6,8 +6,9 @@ import mobile_logo from "../../assets/images/title_logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setAuthData } from "../../store/slices/auth";
+import spinner from "../../assets/images/spinner.gif";
 
-const Navbar = () => {
+const Navbar = ({ loading }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const selected_language = useSelector((state) => state.language);
@@ -43,6 +44,11 @@ const Navbar = () => {
           className="nav_middle_logo"
         />
         <span className="nav_middle_name">{selected_language.name}</span>
+        {loading ? (
+          <img src={spinner} alt="" className="nav_middle_logo" />
+        ) : (
+          ""
+        )}
       </div>
       <div className="nav_right">
         {authData.user ? (

@@ -64,8 +64,9 @@ $breakpoint: 768px;
     .login_layer {
       position: absolute;
       background: black;
-      height: 100%;
+      height: calc(100% - 8vh);
       width: 100%;
+      top: 8vh;
       opacity: 50%;
       display: flex;
       flex-direction: column;

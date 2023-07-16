@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const selected_language = useSelector((state) => state.language);
   const [selectedPannel, setSelectedPannel] = useState("main");
+  const [loading, setLoading] = useState(false);
   const [answer, setAnswer] = useState("");
   const [codeSnippet, setCodeSnippet] = useState(
     atob(selected_language.snippet)
@@ -30,31 +31,45 @@ const HomePage = () => {
 
   const getAnswer = async (token) => {
     let response = await axios.get(
-      `http://localhost:8080/api/v1/submissions/${token}`
+      `https://online-compiler-server.vercel.app/api/v1/submissions/${token}`
     );
+    console.log(response);
     if (response.data.result.status.id === 3) {
       setAnswer(response.data.result.stdout);
+      setLoading(false);
     } else {
-      getAnswer(token);
+      setTimeout(() => {
+        getAnswer(token);
+        console.log("Timeout Done 2");
+      }, 3000);
     }
   };
 
-  /* const compileCode = async () => {
-    const encode = window.btoa(codeSnippet);
-    const submissionResponse = await axios.post(
-      "http://localhost:8080/api/v1/submissions",
-      {
-        language_id: selected_language.id,
-        source_code: encode,
-      }
-    );
-    let token = submissionResponse.data.token;
-    getAnswer(token);
+  const compileCode = async () => {
+    if (authData.user) {
+      setLoading(true);
+      const encode = window.btoa(codeSnippet);
+      const submissionResponse = await axios.post(
+        "https://online-compiler-server.vercel.app/api/v1/submissions",
+        {
+          language_id: selected_language.id,
+          source_code: encode,
+        }
+      );
+      let token = submissionResponse.data.token;
+
+      setTimeout(() => {
+        getAnswer(token);
+        console.log("Timeout Done 1");
+      }, 5000);
+    } else {
+      alert("Please Login first to execute the code. Thanks!");
+    }
   };
-*/
+
   return (
     <>
-      <Navbar />
+      <Navbar loading={loading} />
 
       <div className="home">
         <SideBar setOutput={setOutput} setSelectedPannel={setSelectedPannel} />
@@ -89,8 +104,8 @@ const HomePage = () => {
               <button
                 className="mobile_area_bar_run_btn"
                 onClick={() => {
-                  // compileCode();
-                  setSelectedPannel("shell");
+                  compileCode();
+                  if (authData.user) setSelectedPannel("shell");
                 }}
               >
                 <BiRightArrow />
@@ -101,15 +116,7 @@ const HomePage = () => {
             <span className="code-filename">
               main.{selected_language.file_extension}
             </span>
-            <button
-              className="code-run-btn"
-              // onClick={compileCode}
-              onClick={() => {
-                setOutput(
-                  `> Enable the compileCode() function to run the code`
-                );
-              }}
-            >
+            <button className="code-run-btn" onClick={compileCode}>
               Run
             </button>
           </div>

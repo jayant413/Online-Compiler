@@ -41,7 +41,7 @@ app.get("*", async (req, res) => {
 
 // listen server
 app.listen(PORT, () => {
-    console.log(`Server is Running on PORT : http://localhost:${PORT}`.bgCyan.white)
+    console.log(`Server is Running on PORT : ${PORT}`.bgCyan.white)
 })
 
 
