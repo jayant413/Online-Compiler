@@ -1,0 +1,57 @@
+$breakpoint: 768px;
+
+.code-area {
+  height: 100%;
+  width: 100%;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: #1c2130;
+  .code-area-bar {
+    background-color: #2f3033;
+    display: flex;
+    height: 8vh;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    justify-content: space-between;
+    align-items: center;
+    .code-filename {
+      background-color: #1c2130;
+      width: 8rem;
+      cursor: default;
+      height: 7.5vh;
+      display: grid;
+      place-content: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .code-run-btn {
+      cursor: pointer;
+      padding: 6px 16px;
+      margin: 0.7rem 2rem;
+      background: #0556f3;
+      font-size: 14px;
+      line-height: 20px;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      font-weight: bold;
+      &:hover {
+        background: blue;
+      }
+    }
+  }
+  textarea {
+    resize: none;
+    background-color: transparent;
+    height: 95%;
+    width: 95%;
+    outline: none;
+    border: none;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: $breakpoint) {
+  .code-area {
+    .code-area-bar {
+      display: none;
+    }
+  }
+}

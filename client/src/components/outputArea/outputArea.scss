@@ -1,0 +1,125 @@
+$breakpoint: 768px;
+
+.output-area {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: #1c2130;
+  .login_layer {
+    position: absolute;
+    background: black;
+    height: calc(100% - 8vh);
+    width: 100%;
+    top: 8vh;
+    opacity: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .login_layer_msg {
+      cursor: default;
+    }
+    .login_layer_btns {
+      display: flex;
+      margin: 1rem 0;
+      .login_layer_btn {
+        background: #045cfb;
+        padding: 0.2rem 0.5rem;
+        margin: 0 0.5rem;
+        border-radius: 5px;
+        color: white;
+        font-weight: 500;
+        &:hover {
+          background: blue;
+        }
+      }
+    }
+  }
+  .output-area-bar {
+    background-color: #2f3033;
+    padding: 0.7rem 2rem;
+    height: 8vh;
+    align-items: center;
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    justify-content: space-between;
+    .output-area-title {
+      cursor: default;
+    }
+    .output-clear-btn {
+      cursor: pointer;
+      padding: 6px 16px;
+      background: transparent;
+      font-size: 14px;
+      line-height: 20px;
+      border: 1px solid white;
+      outline: none;
+      border-radius: 5px;
+      font-weight: bold;
+      &:hover {
+        background: rgba(79, 79, 79, 0.619);
+      }
+    }
+  }
+
+  textarea {
+    resize: none;
+    background-color: transparent;
+    height: 90%;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: $breakpoint) {
+  // Your styles for the specified breakpoint
+
+  .output-area {
+    // display: none;
+    .mobile_area_bar {
+      display: flex;
+      height: 8vh;
+      background-color: #2f3033;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      align-items: center;
+      justify-content: space-around;
+      .mobile_area_bar_left {
+        .mobile_area_bar_btn {
+          padding: 0.3rem 0.5rem;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          &.selected_pannel_btn {
+            background-color: blue;
+            border: none;
+          }
+          &:first-child {
+            border-radius: 5px 0 0 5px;
+          }
+          &:nth-child(2) {
+            border-radius: 0 5px 5px 0;
+          }
+          &:hover {
+            background: #0556f3;
+          }
+        }
+      }
+      .mobile_area_bar_right {
+        .mobile_area_bar_run_btn {
+          padding: 0.3rem 1rem;
+          background: blue;
+          border-radius: 5px;
+          &:hover {
+            background: #0556f3;
+          }
+        }
+      }
+    }
+    .output-area-bar {
+      display: none;
+    }
+    textarea {
+      padding: 1rem 0.3rem;
+    }
+  }
+}
